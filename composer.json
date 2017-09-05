@@ -1,0 +1,15 @@
+{
+  "name": "ifnot/laravel-vuex",
+  "authors": [
+    {
+      "name": "Favre Anael",
+      "email": "anael.favre@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Ifnot\\LaravelVuex\\": "src"
+    }
+  }
+}
