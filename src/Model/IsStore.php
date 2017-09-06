@@ -6,10 +6,6 @@ trait IsStore
 {
     public function getStore()
     {
-        if(isset($this->store)) {
-            return new $this->store($this);
-        } else {
-            return new Store($this);
-        }
+        return isset($this->store) ? new $this->store($this) : new Store($this);
     }
 }
