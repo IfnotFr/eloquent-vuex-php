@@ -56,7 +56,10 @@ All your events are now broadcasted through Echo. [You can now follow the instal
 
 ## Example
 
-There is an [example project demonstrating the package](https://github.com/Ifnot/laravel-vuex-php-example).
+There is two examples project demonstrating the package :
+
+* [Server side (Laravel)](https://github.com/Ifnot/laravel-vuex-php-example)
+* [Client side (Vuejs)](https://github.com/Ifnot/laravel-vuex-js-example)
 
 ## Documentation
 
