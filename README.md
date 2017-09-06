@@ -5,7 +5,7 @@ Eloquent events are broadcasted to your Vuejs application and traduced in mutati
 
 ## Installation
 
-    composer install ifnot/laravel-vuex
+    composer require ifnot/laravel-vuex
 
 As it is a WIP, you may want lower your stability options in your `composer.json` :
 
