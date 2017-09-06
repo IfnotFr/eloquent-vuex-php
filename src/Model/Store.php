@@ -48,7 +48,7 @@ class Store
      * Transform the model object to array in order to be serialized on the broadcast event.
      *
      * @param \Illuminate\Database\Eloquent\Model $model
-     * @return mixed
+     * @return array
      */
     public function toArray(Model $model)
     {
@@ -58,7 +58,7 @@ class Store
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return Channel|array
+     * @return Channel
      */
     public function broadcastOn()
     {
