@@ -1,11 +1,16 @@
 {
   "name": "ifnot/laravel-vuex",
+  "homepage": "https://github.com/Ifnot/laravel-vuex-php",
+  "license": "MIT",
   "authors": [
     {
       "name": "Favre Anael",
       "email": "anael.favre@gmail.com"
     }
   ],
+  "support": {
+    "issues": "https://github.com/Ifnot/laravel-vuex-php/issues"
+  },
   "require": {},
   "autoload": {
     "psr-4": {
