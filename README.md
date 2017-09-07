@@ -24,7 +24,7 @@ We just assume that one table (with eloquent) is one vuex store. With this syste
 Observe your reactive models in a service provider (for example `App\Providers\AppServiceProvider`) :
 
 ```php
-use Ifnot\LaravelVuex\ModelObserver;
+use Ifnot\LaravelVuex\MutationBroadcaster;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // ...
         
-        ModelObserver::observe([Car::class]);
+        MutationBroadcaster::observe([Car::class]);
     }
     
     // ...
