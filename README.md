@@ -5,7 +5,7 @@ Eloquent events are broadcasted to your Vuejs application and traduced in mutati
 
 ## Installation
 
-    composer install ifnot/laravel-vuex
+    composer require ifnot/laravel-vuex
 
 As it is a WIP, you may want lower your stability options in your `composer.json` :
 
@@ -21,19 +21,7 @@ We just assume that one table (with eloquent) is one vuex store. With this syste
 
 > Important : before using this package you should have a working Echo installation (client + server). [Please follow the official installation steps from the documentation](https://laravel.com/docs/5.5/broadcasting). You have to be able to send a ping from laravel and read it with Echo.
 
-First, create your models as usual and add the trait `Ifnot\LaravelVuex\Model\IsStore`.
-
-```php
-use Ifnot\LaravelVuex\Model\IsStore;
-use Illuminate\Database\Eloquent\Model;
-
-class Car extends Model
-{
-    use IsStore;
-}
-```
-
-Secondly, observe your reactive models in a service provider (for example `App\Providers\AppServiceProvider`) :
+Observe your reactive models in a service provider (for example `App\Providers\AppServiceProvider`) :
 
 ```php
 use Ifnot\LaravelVuex\ModelObserver;

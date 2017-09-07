@@ -2,20 +2,27 @@
 
 namespace Ifnot\LaravelVuex;
 
+use Ifnot\LaravelVuex\Model\Store;
 use Illuminate\Database\Eloquent\Model;
 
 class Helper
 {
     /**
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param array $relatedModels
-     * @return array
+     * Return an unique identified for this model.
      */
-    public static function getCascadeRelatedModels(Model $model, $relatedModels = [])
+    public static function getModelUniqueIndex(Model $model): string
+    {
+        return get_class($model).':'.$model->id;
+    }
+
+    /**
+     * Get all related models recursively for the given model.
+     */
+    public static function getCascadeRelatedModels(Model $model, array $relatedModels = []): array
     {
         $relatedModels[self::getModelUniqueIndex($model)] = $model;
 
-        foreach (self::getModelRelated($model) as $relatedModel) {
+        foreach (self::getRelatedModels($model) as $relatedModel) {
             if (! isset($relatedModels[self::getModelUniqueIndex($relatedModel)])) {
                 $relatedModels = self::getCascadeRelatedModels($relatedModel, $relatedModels);
             }
@@ -25,29 +32,17 @@ class Helper
     }
 
     /**
-     * Get the model name based on the name
-     *
-     * @param $model
-     * @return string
+     * Get the related models of a given model.
      */
-    public static function getModelUniqueIndex(Model $model)
-    {
-        return get_class($model).':'.$model->id;
-    }
-
-    /**
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @return array
-     */
-    protected static function getModelRelated(Model $model)
+    protected static function getRelatedModels(Model $model): array
     {
         $relatedModels = [];
 
-        if(method_exists($model, 'getStore')) {
-            foreach ($model->getStore()->getCascadeRelations() as $method) {
-                foreach ($model->$method()->get() as $relatedModel) {
-                    $relatedModels[] = $relatedModel;
-                }
+        $store = $model->store ? new $model->store($model) : new Store($model);
+
+        foreach ($store->getCascadeRelations() as $method) {
+            foreach ($model->$method()->get() as $relatedModel) {
+                $relatedModels[] = $relatedModel;
             }
         }
 

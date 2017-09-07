@@ -9,69 +9,40 @@ class Store
 {
     protected $model;
 
-    public function __construct($model)
+    public function __construct(Model $model)
     {
         $this->model = $model;
     }
 
     /**
      * Return the related models witch should be updated when this model is updated / deleted
-     *
-     * @return array
      */
-    public function getCascadeRelations()
+    public function getCascadeRelations(): array
     {
         return [];
     }
 
     /**
-     * Get the namespace of the vuex store
-     *
-     * @return string
-     */
-    public function getNamespace()
-    {
-        return str_plural(snake_case(class_basename($this->model)));
-    }
-
-    /**
-     * Get the vuex store state where we should bring the broadcast.
-     *
-     * @return string|array
-     */
-    public function getState()
-    {
-        return 'all';
-    }
-
-    /**
      * Transform the model object to array in order to be serialized on the broadcast event.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @return mixed
      */
-    public function toArray(Model $model)
+    public function toArray(): array
     {
-        return $model->toArray();
+        return $this->model->toArray();
     }
 
     /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
+     * Get the different broadcasts to do for this model.
+     * You can do multiple broadcasts for a single model event.
      */
-    public function broadcastOn()
+    public function getBroadcasts(): array
     {
-        return new Channel('public');
-    }
-
-    /**
-     * Determine if this event should broadcast.
-     *
-     * @return bool
-     */
-    public function broadcastWhen()
-    {
-        return true;
+        return [
+            [
+                'namespace' => str_plural(snake_case(class_basename($this->model))),
+                'state' => 'all',
+                'channel' => new Channel('public'),
+                'events' => ['create', 'update', 'delete'],
+            ],
+        ];
     }
 }

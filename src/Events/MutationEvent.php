@@ -9,60 +9,62 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 class MutationEvent implements ShouldBroadcast
 {
-    private $model;
-    private $store;
+    private $payload;
+    private $broadcast;
     private $mutation;
 
     /**
-     * Create a new event instance.
-     *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param $mutation
-     * @throws \Exception
+     * Create a new MutationEvent instance.
      */
-    public function __construct(Model $model, $mutation)
+    public function __construct(array $payload, array $broadcast, string $mutation)
     {
-        if(!method_exists($model, 'getStore')) {
-            throw new \Exception("Could not broadcast vuex mutation event for model " . get_class($model) . ", the model does not have the " . IsStore::class . " trait.");
-        }
-
-        $this->model = $model;
-        $this->store = $model->getStore();
+        $this->payload = $payload;
+        $this->broadcast = $broadcast;
         $this->mutation = $mutation;
     }
 
     /**
-     * The event's broadcast name.
-     *
-     * @return string
+     * Get the event's broadcast name.
      */
-    public function broadcastAs()
+    public function broadcastAs(): string
     {
         return 'laravel.vuex:mutation';
     }
 
     /**
      * Get the data to broadcast.
-     *
-     * @return array
      */
-    public function broadcastWith()
+    public function broadcastWith(): array
     {
         return [
-            'namespace' => $this->store->getNamespace($this->model),
-            'mutation' => $this->mutation,
-            'state' => $this->store->getState(),
-            'payload' => $this->store->toArray($this->model),
+            'vuex' => [
+                'namespace' => $this->broadcast['namespace'],
+                'state' => $this->broadcast['state'],
+                'mutation' => $this->mutation,
+            ],
+            'payload' => $this->payload,
         ];
     }
 
     /**
      * Get the channels the event should broadcast on.
-     *
-     * @return Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel
     {
-        return $this->store->broadcastOn();
+        return $this->broadcast['channel'];
+    }
+
+    /**
+     * Determine if this event should broadcast or not based on the event whitelist
+     */
+    public function broadcastWhen(): bool
+    {
+        // If there is no whitelist for mutation names
+        if(!isset($this->broadcast['events'])) {
+            return true;
+        }
+
+        // If the mutation name is whitelisted on the broadcast events
+        return in_array($this->mutation, $this->broadcast['events']);
     }
 }
