@@ -3,6 +3,7 @@
 namespace Ifnot\LaravelVuex\Vuex;
 
 use Ifnot\LaravelVuex\Helper;
+use Ifnot\LaravelVuex\Vuex\States\State;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
 
