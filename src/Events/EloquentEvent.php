@@ -2,11 +2,9 @@
 
 namespace Ifnot\LaravelVuex;
 
-use Ifnot\LaravelVuex\Events\MutationEvent;
-use Ifnot\LaravelVuex\Model\Store;
 use Illuminate\Database\Eloquent\Model;
 
-class Mutation
+class EloquentEvent
 {
     protected $related = [];
 

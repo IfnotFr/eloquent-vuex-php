@@ -2,25 +2,33 @@
 
 namespace Ifnot\LaravelVuex\Events;
 
-use Ifnot\LaravelVuex\Model\IsStore;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MutationEvent implements ShouldBroadcast
+class BroadcastEvent implements ShouldBroadcast
 {
+    private $namespace;
+    private $state;
+
     private $payload;
-    private $broadcast;
     private $mutation;
+
+    private $meta;
+    private $channel;
 
     /**
      * Create a new MutationEvent instance.
      */
-    public function __construct(array $payload, array $broadcast, string $mutation)
+    public function __construct(string $namespace, string $state, array $payload, string $mutation, array $meta = [], Channel $channel = null)
     {
+        $this->namespace = $namespace;
+        $this->state = $state;
+
         $this->payload = $payload;
-        $this->broadcast = $broadcast;
         $this->mutation = $mutation;
+
+        $this->meta = $meta;
+        $this->channel = $channel ?? new Channel('global');
     }
 
     /**
@@ -38,10 +46,11 @@ class MutationEvent implements ShouldBroadcast
     {
         return [
             'vuex' => [
-                'namespace' => $this->broadcast['namespace'],
-                'state' => $this->broadcast['state'],
+                'namespace' => $this->namespace,
+                'state' => $this->state,
                 'mutation' => $this->mutation,
             ],
+            'meta' => $this->meta,
             'payload' => $this->payload,
         ];
     }
@@ -51,20 +60,6 @@ class MutationEvent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return $this->broadcast['channel'];
-    }
-
-    /**
-     * Determine if this event should broadcast or not based on the event whitelist
-     */
-    public function broadcastWhen(): bool
-    {
-        // If there is no whitelist for mutation names
-        if(!isset($this->broadcast['events'])) {
-            return true;
-        }
-
-        // If the mutation name is whitelisted on the broadcast events
-        return in_array($this->mutation, $this->broadcast['events']);
+        return $this->channel;
     }
 }

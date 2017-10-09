@@ -18,14 +18,18 @@ class Helper
     /**
      * Get all related models recursively for the given model.
      */
-    public static function getCascadeRelatedModels(Model $model, array $relatedModels = []): array
+    public static function getCascadeRelatedModels(Model $model, array $relatedModels = [], $level = 0): array
     {
         $relatedModels[self::getModelUniqueIndex($model)] = $model;
 
         foreach (self::getRelatedModels($model) as $relatedModel) {
             if (! isset($relatedModels[self::getModelUniqueIndex($relatedModel)])) {
-                $relatedModels = self::getCascadeRelatedModels($relatedModel, $relatedModels);
+                $relatedModels = self::getCascadeRelatedModels($relatedModel, $relatedModels, $level + 1);
             }
+        }
+
+        if ($level === 0) {
+            unset($relatedModels[self::getModelUniqueIndex($model)]);
         }
 
         return $relatedModels;

@@ -13,7 +13,7 @@ class LaravelVuexServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        include __DIR__.'/../helpers.php';
     }
 
     /**
