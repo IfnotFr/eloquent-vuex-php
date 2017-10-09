@@ -2,7 +2,7 @@
 
 namespace Ifnot\LaravelVuex;
 
-use Ifnot\LaravelVuex\Model\Store;
+use Ifnot\LaravelVuex\Vuex\Store;
 use Illuminate\Database\Eloquent\Model;
 
 class Helper
