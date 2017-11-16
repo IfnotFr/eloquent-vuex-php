@@ -58,17 +58,15 @@ class Store
      */
     public function __call($name, $arguments)
     {
-        if (in_array($name, ['create', 'update', 'delete'])) {
-            list($model, $meta) = $arguments;
-            $noRelations = isset($arguments[2]) ? $arguments[2] : false;
+        list($model, $meta) = $arguments;
+        $noRelations = isset($arguments[2]) ? $arguments[2] : false;
 
-            foreach ($this->getStates($model) as $state) {
-                $state->$name($model, $meta);
-            }
-            if(! $noRelations) {
-                foreach ($this->getRelatedStates($model) as $stateInfos) {
-                    $stateInfos['state']->update($stateInfos['model']);
-                }
+        foreach ($this->getStates($model) as $state) {
+            $state->$name($model, $meta);
+        }
+        if(! $noRelations) {
+            foreach ($this->getRelatedStates($model) as $stateInfos) {
+                $stateInfos['state']->update($stateInfos['model']);
             }
         }
     }

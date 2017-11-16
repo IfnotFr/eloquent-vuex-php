@@ -6,6 +6,7 @@ use Ifnot\LaravelVuex\Events\BroadcastEvent;
 use Ifnot\LaravelVuex\Vuex\Store;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Arr;
 
 class State
 {
@@ -33,6 +34,11 @@ class State
     public function delete(Model $model, array $meta = [])
     {
         $this->emit($model, 'delete', $this->channel,  $meta);
+    }
+
+    public function __call($name, $args)
+    {
+        $this->emit(Arr::get($args, 0), $name, $this->channel, Arr::get($args, 1, []));
     }
 
     public function emit(Model $model, string $event, Channel $channel, array $meta = [])
