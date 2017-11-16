@@ -49,7 +49,7 @@ class ModelObserver
     protected function fire($model, $event)
     {
         if (! $this->isModelIgnored($model)) {
-            model_event($model, $event);
+            model_mutation($model, $event);
         }
     }
 
