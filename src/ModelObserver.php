@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ModelObserver
 {
-    public static $ignoreClasses = [];
-
     /**
      * Observe multiples models in order to broadcasts their events
      */
@@ -48,13 +46,6 @@ class ModelObserver
      */
     protected function fire($model, $event)
     {
-        if (! $this->isModelIgnored($model)) {
-            model_event($model, $event);
-        }
-    }
-
-    protected function isModelIgnored(Model $model)
-    {
-        return in_array(get_class($model), self::$ignoreClasses);
+        ModelBroadcaster::fire($model, $event);
     }
 }
