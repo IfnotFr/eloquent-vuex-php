@@ -8,7 +8,7 @@ class PartialState extends State
 {
     public function create(Model $model, array $meta = [])
     {
-
+        // Do nothing
     }
 
     public function update(Model $model, array $meta = [])
@@ -18,6 +18,6 @@ class PartialState extends State
 
     public function delete(Model $model, array $meta = [])
     {
-
+        // Do nothing
     }
 }
