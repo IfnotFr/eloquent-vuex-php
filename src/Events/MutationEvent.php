@@ -5,7 +5,7 @@ namespace Ifnot\LaravelVuex\Events;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class BroadcastEvent implements ShouldBroadcast
+class MutationEvent implements ShouldBroadcast
 {
     private $namespace;
     private $state;
@@ -29,14 +29,6 @@ class BroadcastEvent implements ShouldBroadcast
 
         $this->meta = $meta;
         $this->channel = $channel ?? new Channel('global');
-    }
-
-    /**
-     * Get the event's broadcast name.
-     */
-    public function broadcastAs(): string
-    {
-        return 'laravel.vuex:mutation';
     }
 
     /**

@@ -2,9 +2,8 @@
 
 namespace Ifnot\LaravelVuex\Vuex\States;
 
-use Ifnot\LaravelVuex\Events\BroadcastEvent;
+use Ifnot\LaravelVuex\Events\MutationEvent;
 use Ifnot\LaravelVuex\Vuex\Store;
-use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 
@@ -56,7 +55,7 @@ class State
     public function emit(Model $model, string $event, $channel, array $meta = [])
     {
         if($channel !== false) {
-            event(new BroadcastEvent($this->store->getNamespace(), $this->name, $this->store->toArray($model), $event, $meta, $channel));
+            event(new MutationEvent($this->store->getNamespace(), $this->name, $this->store->toArray($model), $event, $meta, $channel));
         }
     }
 }
