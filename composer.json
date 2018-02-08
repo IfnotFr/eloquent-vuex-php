@@ -1,6 +1,6 @@
 {
-  "name": "ifnot/laravel-vuex",
-  "homepage": "https://github.com/Ifnot/laravel-vuex-php",
+  "name": "ifnot/eloquent-vuex",
+  "homepage": "https://github.com/Ifnot/eloquent-vuex-php",
   "license": "MIT",
   "authors": [
     {
@@ -9,12 +9,12 @@
     }
   ],
   "support": {
-    "issues": "https://github.com/Ifnot/laravel-vuex-php/issues"
+    "issues": "https://github.com/Ifnot/eloquent-vuex-php/issues"
   },
   "require": {},
   "autoload": {
     "psr-4": {
-      "Ifnot\\LaravelVuex\\": "src"
+      "Ifnot\\EloquentVuex\\": "src"
     }
   }
 }

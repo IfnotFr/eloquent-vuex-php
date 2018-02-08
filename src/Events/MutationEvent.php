@@ -1,6 +1,6 @@
 <?php
 
-namespace Ifnot\LaravelVuex\Events;
+namespace Ifnot\EloquentVuex\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

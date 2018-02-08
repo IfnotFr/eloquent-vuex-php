@@ -1,6 +1,6 @@
 <?php
 
-namespace Ifnot\LaravelVuex;
+namespace Ifnot\EloquentVuex;
 
 use Illuminate\Database\Eloquent\Model;
 

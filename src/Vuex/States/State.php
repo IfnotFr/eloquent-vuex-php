@@ -1,9 +1,9 @@
 <?php
 
-namespace Ifnot\LaravelVuex\Vuex\States;
+namespace Ifnot\EloquentVuex\Vuex\States;
 
-use Ifnot\LaravelVuex\Events\MutationEvent;
-use Ifnot\LaravelVuex\Vuex\Store;
+use Ifnot\EloquentVuex\Events\MutationEvent;
+use Ifnot\EloquentVuex\Vuex\Store;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ifnot\LaravelVuex\Vuex;
+namespace Ifnot\EloquentVuex\Vuex;
 
-use Ifnot\LaravelVuex\Helper;
-use Ifnot\LaravelVuex\Vuex\States\State;
+use Ifnot\EloquentVuex\Helper;
+use Ifnot\EloquentVuex\Vuex\States\State;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Database\Eloquent\Model;
 

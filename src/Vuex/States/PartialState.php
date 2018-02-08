@@ -1,6 +1,6 @@
 <?php
 
-namespace Ifnot\LaravelVuex\Vuex\States;
+namespace Ifnot\EloquentVuex\Vuex\States;
 
 use Illuminate\Database\Eloquent\Model;
 

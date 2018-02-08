@@ -1,8 +1,8 @@
 <?php
 
-namespace Ifnot\LaravelVuex;
+namespace Ifnot\EloquentVuex;
 
-use Ifnot\LaravelVuex\Vuex\Store;
+use Ifnot\EloquentVuex\Vuex\Store;
 use Illuminate\Database\Eloquent\Model;
 
 class ModelObserver

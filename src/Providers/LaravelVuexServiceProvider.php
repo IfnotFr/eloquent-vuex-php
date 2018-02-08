@@ -1,10 +1,10 @@
 <?php
 
-namespace Ifnot\LaravelVuex\Providers;
+namespace Ifnot\EloquentVuex\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelVuexServiceProvider extends ServiceProvider
+class EloquentVuexServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
