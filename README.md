@@ -1,6 +1,6 @@
 # Eloquent Vuex - WIP
 
-**Realtime model synchronization between Vuex (VueJs) and Laravel Database (Eloquent)**
+**Realtime model synchronization between `Vuex` (VueJs) and Eloquent (Laravel)**
 
 This package allows you to send eloquent events (create, update and delete) through laravel echo as vuex mutations in order to keep all your clients data in sync with your laravel database.
 
