@@ -22,7 +22,7 @@ class ModelObserver
      */
     public function created(Model $model)
     {
-        $this->fire($model->fresh(), 'create');
+        $this->fire($model, 'create');
     }
 
     /**
@@ -30,7 +30,7 @@ class ModelObserver
      */
     public function updated(Model $model)
     {
-        $this->fire($model->fresh(), 'update');
+        $this->fire($model, 'update');
     }
 
     /**
